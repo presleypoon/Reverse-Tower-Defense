@@ -1,14 +1,14 @@
 import initWasm, {game_start} from "../pkg/Reverse_Tower_Defense.js";
 
-function render() {
+export function render() {
   throw new Error("still making");
 }
 
-function log(string) {
+export function log(string) {
   console.log(string);
 }
 
-function error(string) {
+export function error(string) {
   console.error(string);
 }
 

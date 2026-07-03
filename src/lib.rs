@@ -9,6 +9,7 @@ extern "C" {
     fn error(string: String) -> ();
 }
 
+#[wasm_bindgen]
 pub fn game_start() {
     init();
     loop {
