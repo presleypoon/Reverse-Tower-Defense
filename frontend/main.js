@@ -1,16 +1,15 @@
-import initWasm, {game_start} from "../pkg/Reverse_Tower_Defense.js";
+import initWasm, {game_start, game_tick as rust_gt} from "../pkg/Reverse_Tower_Defense.js";
 
-export function render() {
+function render() {
   throw new Error("still making");
 }
 
-export function log(string) {
-  console.log(string);
-}
-
-export function error(string) {
-  console.error(string);
-}
+window.render = render;
 
 await initWasm();
-game_start();
+game_tick();
+
+function game_tick() {
+  rust_gt();
+  requestAnimationFrame(game_tick);
+}

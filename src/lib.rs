@@ -1,25 +1,23 @@
-use std::thread::sleep;
-use std::time::Duration;
+use std::panic::set_hook;
 use wasm_bindgen::prelude::*;
 
 #[wasm_bindgen()]
 extern "C" {
     fn render() -> ();
-    fn log(string: String) -> ();
-    fn error(string: String) -> ();
+    #[wasm_bindgen(js_namespace = console)]
+    fn log(s: String);
+    #[wasm_bindgen(js_namespace=console)]
+    fn error(s: String);
 }
 
 #[wasm_bindgen]
 pub fn game_start() {
     init();
-    loop {
-        game_tick();
-    }
 }
 
-fn init() {}
-
-fn game_tick() {
-    log("one tick has passed".to_string());
-    sleep(Duration::from_millis(17));
+fn init() {
+    set_hook(Box::new(console_error_panic_hook::hook));
 }
+
+#[wasm_bindgen]
+pub fn game_tick() {}
